@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Servicios NOTPEN – Zona Nuevo Laredo DD030</title>
+<title>SiGeNa · Sistema de Gestión de Notificaciones de Ajuste – Zona Nuevo Laredo DD030</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -116,9 +116,9 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
 @media(max-width:900px){.resp-cards,.kpi-row{grid-template-columns:repeat(2,1fr)}}
 @media print{.controls,.resp-cards,.sec-hdr,.paginator,.footbar{display:none!important}body{background:#fff}}
 
-/* ══════════════════════════════════════
+/* ======================================
    MODO MÓVIL  (max 600px)
-   ══════════════════════════════════════ */
+   ====================================== */
 @media(max-width:600px){
   /* Topbar compacto */
   .topbar{padding:8px 12px;gap:6px}
@@ -207,7 +207,7 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
   .conv-print-btn{width:100%;justify-content:center}
 }
 
-/* ── MODAL CONVENIO ── */
+/* -- MODAL CONVENIO -- */
 .conv-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;align-items:center;justify-content:center;padding:12px}
 .conv-ov.open{display:flex}
 .conv-box{background:#fff;border-radius:10px;width:640px;max-width:97vw;max-height:94vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.3);display:flex;flex-direction:column}
@@ -278,7 +278,7 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
 .av-l{background:#FFF3E0;color:#E65100}.av-m{background:#FAFAFA;color:#424242}
 
 
-/* ── EVIDENCIAS ── */
+/* -- EVIDENCIAS -- */
 .ev-wrap{padding:4px 0}
 .ev-upload-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border:2px dashed #A5D6A7;border-radius:8px;background:#F1F8E9;color:#2E7D32;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:10px;transition:background .15s}
 .ev-upload-btn:hover{background:#C8E6C9}
@@ -297,12 +297,42 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
 .ev-lightbox-close{position:absolute;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:none;border:none;line-height:1}
 .ev-lightbox-caption{color:#ddd;font-size:11px;margin-top:8px;text-align:center}
 @media(max-width:600px){.ev-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* -- REPORTE EMAIL -- */
+.btn-reporte{background:#C62828;color:#fff;border:none;padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn-reporte:hover{background:#B71C1C}
+.btn-reporte .badge-count{background:#fff;color:#C62828;font-size:9px;font-weight:700;border-radius:10px;padding:1px 5px;min-width:16px;text-align:center}
+.gestionado-hoy{position:absolute;top:4px;left:4px;background:#2E7D32;color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:2px}
+.svc-card{position:relative}
+.obs-preview{font-size:9px;color:#2E7D32;font-style:italic;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Modal reporte email */
+.rpt-email-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:700;align-items:flex-end;justify-content:center}
+.rpt-email-ov.open{display:flex}
+.rpt-email-box{background:#fff;border-radius:12px 12px 0 0;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;box-shadow:0 -4px 32px rgba(0,0,0,.2)}
+.rpt-email-hdr{background:#C62828;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:12px 12px 0 0}
+.rpt-email-hdr h2{font-size:14px;font-weight:700}
+.rpt-email-hdr p{font-size:10px;opacity:.85;margin-top:2px}
+.rpt-email-body{padding:14px 18px}
+.rpt-email-row{background:#FAFAFA;border:1px solid #e0e0e0;border-radius:6px;padding:10px 12px;margin-bottom:8px}
+.rpt-email-row-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px}
+.rpt-email-nombre{font-size:12px;font-weight:700;color:#222;flex:1}
+.rpt-email-imp{font-size:12px;font-weight:700;color:#1B5E20;white-space:nowrap}
+.rpt-email-meta{font-size:10px;color:#666;margin-bottom:3px}
+.rpt-email-obs{font-size:10px;color:#1B5E20;font-style:italic;background:#E8F5E9;padding:4px 8px;border-radius:3px}
+.rpt-email-empty{text-align:center;padding:2rem;color:#aaa;font-size:12px}
+.rpt-email-footer{padding:12px 18px;border-top:1px solid #f0f0f0;background:#fafafa;border-radius:0 0 12px 12px}
+.rpt-email-footer .btn-send{width:100%;padding:12px;background:#C62828;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.rpt-email-footer .btn-send:hover{background:#B71C1C}
+.rpt-email-footer .btn-close-rpt{width:100%;padding:9px;background:#fff;color:#666;border:1px solid #ddd;border-radius:6px;font-size:12px;cursor:pointer;margin-top:8px}
+@media(min-width:601px){.rpt-email-ov{align-items:center}.rpt-email-box{border-radius:10px;margin:16px}}
 </style>
 </head>
 <body>
 <div id="loading-overlay" style="position:fixed;inset:0;background:#1B5E20;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#fff;">
   <div style="font-size:28px;margin-bottom:12px">⚡</div>
-  <div style="font-size:16px;font-weight:700;margin-bottom:8px">Cargando Dashboard NOTPEN</div>
+  <div style="font-size:20px;font-weight:800;letter-spacing:.03em;margin-bottom:2px">SiGeNa</div>
+  <div style="font-size:11px;opacity:.85;margin-bottom:14px">Sistema de Gestión de Notificaciones de Ajuste</div>
   <div style="font-size:12px;opacity:.8;margin-bottom:20px">Zona Nuevo Laredo DD030</div>
   <div style="width:200px;height:4px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden">
     <div style="height:100%;background:#fff;border-radius:2px;animation:ldbar 1.8s ease-in-out infinite"></div>
@@ -312,8 +342,8 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
 <style>@keyframes ldbar{0%{width:0;margin-left:0}50%{width:60%;margin-left:20%}100%{width:0;margin-left:100%}}</style>
 <div class="topbar">
   <div>
-    <h1>&#9889; Servicios NOTPEN &ndash; Zona Nuevo Laredo (DD030) &middot; Fichas 1 a 1</h1>
-    <p>CFE Divisi&oacute;n Golfo Norte &middot; Gesti&oacute;n individual por usuario y responsable</p>
+    <h1>&#9889; SiGeNa &middot; Servicios NOTPEN &ndash; Zona Nuevo Laredo (DD030)</h1>
+    <p>Sistema de Gesti&oacute;n de Notificaciones de Ajuste &middot; CFE Divisi&oacute;n Golfo Norte</p>
     <div class="meta">
       <span class="badge bg-green" id="b-total"></span>
       <span class="badge bg-amber" id="b-pend"></span>
@@ -384,11 +414,13 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
     <button class="btn btn-orange" onclick="openRpt()"><i class="ti ti-report"></i> Reporte</button>
     <button class="btn btn-green" onclick="openAdd()"><i class="ti ti-plus"></i> Agregar servicio</button>
     <button class="btn" style="background:#6A1B9A;color:#fff;border-color:#6A1B9A" onmouseover="this.style.background='#4A148C'" onmouseout="this.style.background='#6A1B9A'" onclick="openConvenio()"><i class="ti ti-file-certificate"></i> Requisitos Convenio</button>
+    <button class="btn-reporte" id="btn-enviar-rpt" onclick="openRptEmail()"><i class="ti ti-send"></i> Enviar reporte <span class="badge-count" id="badge-gestionados">0</span></button>
   </div>
   <div class="btn-bar-mobile" style="display:none">
     <button class="btn btn-orange" onclick="openRpt()"><i class="ti ti-report"></i> Reporte</button>
     <button class="btn btn-green" onclick="openAdd()"><i class="ti ti-plus"></i> Nuevo</button>
     <button class="btn" style="background:#6A1B9A;color:#fff;border-color:#6A1B9A" onclick="openConvenio()"><i class="ti ti-file-certificate"></i> Convenio</button>
+    <button class="btn-reporte" onclick="openRptEmail()" style="flex:2"><i class="ti ti-send"></i> Enviar reporte <span class="badge-count" id="badge-gestionados-mob">0</span></button>
   </div>
 </div>
 
@@ -421,7 +453,7 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
   </div>
 </div>
 <div class="paginator" id="paginator"></div>
-<div class="footbar">CFE &middot; Divisi&oacute;n Golfo Norte &middot; Zona Nuevo Laredo DD030 &middot; P-4001-021 Rev.3 &middot; <span id="fecha-foot"></span></div>
+<div class="footbar">SiGeNa &middot; CFE &middot; Divisi&oacute;n Golfo Norte &middot; Zona Nuevo Laredo DD030 &middot; P-4001-021 Rev.3 &middot; <span id="fecha-foot"></span></div>
 
 <!-- MODAL DETALLE -->
 <div class="svc-ov" id="svc-modal">
@@ -528,7 +560,7 @@ tr:hover td{background:#F1F8E9;cursor:pointer}
 
 <script>
 
-var RESP_DATA=[{key:"Ing. Edelmiro Garza",full:"Ing. Edelmiro Garza Rodríguez",ini:"EG",cls:"av-a",bg:"#BBDEFB",co:"#0D47A1",hdr:"#0D47A1",rol:"Superintendente de Zona",criterio:"Adeudos $100,000 en adelante"},{key:"Ing. Diego Reyes",full:"Ing. Diego Alejandro Reyes de la Rosa",ini:"DR",cls:"av-b",bg:"#C8E6C9",co:"#1B5E20",hdr:"#2E7D32",rol:"Jefe Depto. Procesos Comerciales",criterio:"Adeudos $50,000 - $149,999"},{key:"Ing. Maximiliano",full:"Ing. Maximiliano Coronado Rodríguez",ini:"MC",cls:"av-f",bg:"#E8EAF6",co:"#283593",hdr:"#283593",rol:"Jefe Operación CAC's e Ingresos",criterio:"Adeudos $50,000 - $149,999"},{key:"Ing. F. Joel Olvera",full:"Ing. Francisco Joel Olvera Blanco",ini:"JO",cls:"av-d",bg:"#FCE4EC",co:"#880E4F",hdr:"#880E4F",rol:"Jefe Depto. Atención al Cliente",criterio:"Adeudos $50,000 - $149,999 / Clientes estratégicos"},{key:"Lic. Jorge Brizuela",full:"Lic. Jorge Orlando Brizuela Sánchez de Tagle",ini:"JB",cls:"av-e",bg:"#FFCCBC",co:"#BF360C",hdr:"#BF360C",rol:"Jurídico de Zona",criterio:"Adeudos $150,000 en adelante"},{key:"Ing. Jorge Santana",full:"Ing. José Santana Cruz",ini:"JS",cls:"av-c",bg:"#FFF9C4",co:"#E65100",hdr:"#E65100",rol:"Jefe de Oficina de Cobranza",criterio:"Adeudos $1 - $49,999 – Of. Cobranza"},{key:"Ing. Renteria",full:"Ing. José Alberto Rentería Solís",ini:"JR",cls:"av-g",bg:"#E0F2F1",co:"#00695C",hdr:"#00695C",rol:"Jefe de Oficina de Facturación",criterio:"Adeudos $1 - $49,999 – Of. Facturación"},{key:"Ing. Orlando Siaz",full:"Ing. Orlando Siaz Carrillo",ini:"OS",cls:"av-h",bg:"#FBE9E7",co:"#BF360C",hdr:"#BF360C",rol:"Supervisor de Campo",criterio:"Adeudos $1 - $49,999 – Supervisor Campo"},{key:"Ing. Olga Coronado",full:"Ing. Olga Mariela Coronado Rodríguez",ini:"OC",cls:"av-i",bg:"#F3E5F5",co:"#6A1B9A",hdr:"#6A1B9A",rol:"Agente Comercial CAC Oriente",criterio:"Adeudos $1 - $49,999 – Agencia Oriente"},{key:"C.P. Juan Acevedo",full:"C.P. Juan Andrés Acevedo Escamilla",ini:"JA",cls:"av-j",bg:"#E8F5E9",co:"#2E7D32",hdr:"#2E7D32",rol:"Agente Comercial CAC Poniente",criterio:"Adeudos $1 - $49,999 – Agencia Poniente"},{key:"Lic. Juan Gonzalez",full:"Lic. Juan Pablo González Treviño",ini:"JG",cls:"av-k",bg:"#E3F2FD",co:"#1565C0",hdr:"#1565C0",rol:"Agente Comercial CAC Anáhuac",criterio:"Adeudos $1 - $49,999 – Agencia Anáhuac"},{key:"Ing. Manuel Alvarado",full:"Ing. Manuel Roberto Alvarado González",ini:"MA",cls:"av-l",bg:"#FFF3E0",co:"#E65100",hdr:"#E65100",rol:"Agente Comercial CAC Mier",criterio:"Adeudos $1 - $49,999 – CAC Mier / Miguel Alemán"},{key:"Ing. Jose Segura",full:"Ing. José Luis Segura González",ini:"SG",cls:"av-m",bg:"#FAFAFA",co:"#424242",hdr:"#424242",rol:"Agente Comercial CAC Camargo",criterio:"Adeudos $1 - $49,999 – Agencia Camargo"}];
+var RESP_DATA=[{key:"Ing. Edelmiro Garza",full:"Ing. Edelmiro Garza Rodríguez",ini:"EG",cls:"av-a",bg:"#BBDEFB",co:"#0D47A1",hdr:"#0D47A1",rol:"Superintendente de Zona",criterio:"Adeudos $100,000 en adelante"},{key:"Ing. Diego Reyes",full:"Ing. Diego Alejandro Reyes de la Rosa",ini:"DR",cls:"av-b",bg:"#C8E6C9",co:"#1B5E20",hdr:"#2E7D32",rol:"Jefe Depto. Procesos Comerciales",criterio:"Adeudos $50,000 - $149,999"},{key:"Ing. Maximiliano",full:"Ing. Maximiliano Coronado Rodríguez",ini:"MC",cls:"av-f",bg:"#E8EAF6",co:"#283593",hdr:"#283593",rol:"Jefe Operación CAC's e Ingresos",criterio:"Adeudos $50,000 - $149,999"},{key:"Ing. F. Joel Olvera",full:"Ing. Francisco Joel Olvera Blanco",ini:"JO",cls:"av-d",bg:"#FCE4EC",co:"#880E4F",hdr:"#880E4F",rol:"Jefe Depto. Atención al Cliente",criterio:"Adeudos $50,000 - $149,999 / Clientes estratégicos"},{key:"Lic. Jorge Brizuela",full:"Lic. Jorge Orlando Brizuela Sánchez de Tagle",ini:"JB",cls:"av-e",bg:"#FFCCBC",co:"#BF360C",hdr:"#BF360C",rol:"Jurídico de Zona",criterio:"Adeudos $150,000 en adelante"},{key:"Ing. Jorge Santana",full:"Ing. José Santana Cruz",ini:"JS",cls:"av-c",bg:"#FFF9C4",co:"#E65100",hdr:"#E65100",rol:"Jefe de Oficina de Cobranza",criterio:"Adeudos $1 - $49,999 - Of. Cobranza"},{key:"Ing. Renteria",full:"Ing. José Alberto Rentería Solís",ini:"JR",cls:"av-g",bg:"#E0F2F1",co:"#00695C",hdr:"#00695C",rol:"Jefe de Oficina de Facturación",criterio:"Adeudos $1 - $49,999 - Of. Facturación"},{key:"Ing. Orlando Siaz",full:"Ing. Orlando Siaz Carrillo",ini:"OS",cls:"av-h",bg:"#FBE9E7",co:"#BF360C",hdr:"#BF360C",rol:"Supervisor de Campo",criterio:"Adeudos $1 - $49,999 - Supervisor Campo"},{key:"Ing. Olga Coronado",full:"Ing. Olga Mariela Coronado Rodríguez",ini:"OC",cls:"av-i",bg:"#F3E5F5",co:"#6A1B9A",hdr:"#6A1B9A",rol:"Agente Comercial CAC Oriente",criterio:"Adeudos $1 - $49,999 - Agencia Oriente"},{key:"C.P. Juan Acevedo",full:"C.P. Juan Andrés Acevedo Escamilla",ini:"JA",cls:"av-j",bg:"#E8F5E9",co:"#2E7D32",hdr:"#2E7D32",rol:"Agente Comercial CAC Poniente",criterio:"Adeudos $1 - $49,999 - Agencia Poniente"},{key:"Lic. Juan Gonzalez",full:"Lic. Juan Pablo González Treviño",ini:"JG",cls:"av-k",bg:"#E3F2FD",co:"#1565C0",hdr:"#1565C0",rol:"Agente Comercial CAC Anáhuac",criterio:"Adeudos $1 - $49,999 - Agencia Anáhuac"},{key:"Ing. Manuel Alvarado",full:"Ing. Manuel Roberto Alvarado González",ini:"MA",cls:"av-l",bg:"#FFF3E0",co:"#E65100",hdr:"#E65100",rol:"Agente Comercial CAC Mier",criterio:"Adeudos $1 - $49,999 - CAC Mier / Miguel Alemán"},{key:"Ing. Jose Segura",full:"Ing. José Luis Segura González",ini:"SG",cls:"av-m",bg:"#FAFAFA",co:"#424242",hdr:"#424242",rol:"Agente Comercial CAC Camargo",criterio:"Adeudos $1 - $49,999 - Agencia Camargo"}];
 
 var ETAPA_HDR={S0N:"#1565C0",S0L:"#2E7D32",S0P:"#E65100",Relevante:"#283593","Pend. Pago":"#880E4F"};
 var ETAPA_CLS={S0N:"p-S0N",S0L:"p-S0L",S0P:"p-S0P",Relevante:"p-Relevante","Pend. Pago":"p-pago"};
@@ -770,7 +802,7 @@ function openSvc(id){
   smBody.insertBefore(tabsDiv,infoPanel);
   infoPanel.after(medPanel);
 
-  // ── PANEL EVIDENCIAS ──
+  // -- PANEL EVIDENCIAS --
   var evPanel=document.getElementById("tab-evidencias");
   if(!evPanel){
     evPanel=document.createElement("div");
@@ -801,7 +833,19 @@ function saveSvcChanges(){
   if(!s)return;
   s.obs=document.getElementById("sm-obs-input").value;
   s.status=document.getElementById("sm-status-sel").value;
-  closeSvc();applyFilters();
+  // Marcar con fecha/hora de gestión
+  var now=new Date();
+  s.gestionado_en=now.toLocaleString("es-MX",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+  s.gestionado_por=document.getElementById("fil-resp").value||"Campo";
+  closeSvc();applyFilters();actualizarBadge();
+}
+
+function actualizarBadge(){
+  var con_gestion=DATA.filter(function(x){return x.gestionado_en&&(x.obs||x.status!=="Pendiente");}).length;
+  var b1=document.getElementById("badge-gestionados");
+  var b2=document.getElementById("badge-gestionados-mob");
+  if(b1)b1.textContent=con_gestion;
+  if(b2)b2.textContent=con_gestion;
 }
 
 function printSvc(){
@@ -977,7 +1021,7 @@ var fs=hoy.toLocaleDateString("es-MX",opts);
 document.getElementById("fecha-hdr").textContent=fs.charAt(0).toUpperCase()+fs.slice(1);
 document.getElementById("fecha-foot").textContent="Generado: "+fs;
 
-// ── FUNCIONES MODAL CONVENIO ──
+// -- FUNCIONES MODAL CONVENIO --
 function openConvenio(){document.getElementById("conv-modal").classList.add("open");}
 function closeConvenio(){document.getElementById("conv-modal").classList.remove("open");}
 function convTab(idx){
@@ -1018,7 +1062,7 @@ function printConvenio(){
 
 // applyFilters() se llama via DOMContentLoaded al final
 
-// ── EVIDENCIAS ──────────────────────────────────────────
+// -- EVIDENCIAS --
 if(!window._EVIDENCIAS) window._EVIDENCIAS={};
 
 function renderEvidencias(s, panel){
@@ -1092,7 +1136,7 @@ function closeLightbox(){
   document.getElementById("ev-lightbox").querySelector("img").src="";
 }
 
-// ── SOPORTE MÓVIL: botones y resize ──
+// -- SOPORTE MÓVIL: botones y resize --
 function initMobileUI(){
   var mob=isMobile();
   var desktop=document.querySelector(".btn-bar-desktop");
@@ -1104,9 +1148,9 @@ window.addEventListener("resize",function(){initMobileUI();renderTable();});
 
 // Iniciar cuando todo el DOM esté listo
 if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",function(){initMobileUI();applyFilters();document.getElementById("loading-overlay").style.display="none";});
+  document.addEventListener("DOMContentLoaded",function(){initMobileUI();applyFilters();actualizarBadge();document.getElementById("loading-overlay").style.display="none";});
 }else{
-  initMobileUI();applyFilters();document.getElementById("loading-overlay").style.display="none";
+  initMobileUI();applyFilters();actualizarBadge();document.getElementById("loading-overlay").style.display="none";
 }
 </script>
 <script>
@@ -1119,15 +1163,36 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
   <div class="ev-lightbox-caption"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- MODAL REPORTE EMAIL -->
+<div class="rpt-email-ov" id="rpt-email-modal">
+  <div class="rpt-email-box">
+    <div class="rpt-email-hdr">
+      <div>
+        <h2>&#128231; Reporte de Gestión del Día</h2>
+        <p id="rpt-email-subtitle">SiGeNa · CFE DD030 · Zona Nuevo Laredo</p>
+      </div>
+      <button onclick="closeRptEmail()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px">&#10005;</button>
+    </div>
+    <div class="rpt-email-body" id="rpt-email-body">
+    </div>
+    <div class="rpt-email-footer">
+      <button class="btn-send" onclick="enviarReporteCorreo()">
+        <i class="ti ti-send"></i> Enviar correo al Ing. Edelmiro
+      </button>
+      <button class="btn-close-rpt" onclick="closeRptEmail()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
      MODAL: REQUISITOS PARA CONVENIO DE PAGO
-     ══════════════════════════════════════════════════════ -->
+     ====================================================== -->
 <div class="conv-ov" id="conv-modal">
   <div class="conv-box">
     <div class="conv-hdr">
       <div class="conv-hdr-txt">
         <h2>&#128196; Requisitos para Elaboración de Convenio de Pago</h2>
-        <p>CFE División Golfo Norte &middot; Zona Nuevo Laredo DD030 &middot; P-4001-021 Rev.3</p>
+        <p>SiGeNa &middot; CFE División Golfo Norte &middot; Zona Nuevo Laredo DD030 &middot; P-4001-021 Rev.3</p>
       </div>
       <button class="conv-close" onclick="closeConvenio()">&#10005; Cerrar</button>
     </div>
@@ -1146,7 +1211,7 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
         <div class="conv-tab" onclick="convTab(3)">&#128336; Proceso</div>
       </div>
 
-      <!-- ── PANEL 0: PERSONA FÍSICA ── -->
+      <!-- -- PANEL 0: PERSONA FÍSICA -- -->
       <div class="conv-panel active" id="cpanel-0">
         <div class="conv-sec">
           <div class="conv-sec-title">Documentos obligatorios</div>
@@ -1208,7 +1273,7 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
         </div>
       </div>
 
-      <!-- ── PANEL 1: PERSONA MORAL ── -->
+      <!-- -- PANEL 1: PERSONA MORAL -- -->
       <div class="conv-panel" id="cpanel-1">
         <div class="conv-sec">
           <div class="conv-sec-title">Documentos de la empresa</div>
@@ -1277,7 +1342,7 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
         </div>
       </div>
 
-      <!-- ── PANEL 2: CONDICIONES ── -->
+      <!-- -- PANEL 2: CONDICIONES -- -->
       <div class="conv-panel" id="cpanel-2">
         <div class="conv-sec">
           <div class="conv-sec-title">Condiciones financieras del convenio</div>
@@ -1318,7 +1383,7 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
         </div>
       </div>
 
-      <!-- ── PANEL 3: PROCESO ── -->
+      <!-- -- PANEL 3: PROCESO -- -->
       <div class="conv-panel" id="cpanel-3">
         <div class="conv-sec">
           <div class="conv-sec-title">Pasos para tramitar el convenio</div>
@@ -1388,6 +1453,108 @@ var MEDIDORES={"384220500864":{"medidor":"","cod_medidor":"","lote_medidor":"","
 </div>
 
 <script>
+// -- REPORTE EMAIL --
+var CORREO_SUPER = "edelmiro.garza@cfe.mx";
+
+function openRptEmail(){
+  var gestionados = DATA.filter(function(x){
+    return x.gestionado_en && (x.obs || x.status !== "Pendiente");
+  });
+  var body = document.getElementById("rpt-email-body");
+  var sub  = document.getElementById("rpt-email-subtitle");
+  var hoy  = new Date().toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
+  sub.textContent = "SiGeNa · CFE DD030 · " + hoy + " · " + gestionados.length + " gestión" + (gestionados.length !== 1 ? "es" : "");
+
+  if(!gestionados.length){
+    body.innerHTML = '<div class="rpt-email-empty">&#128203; Sin gestiones registradas aún.<br><span style="font-size:10px">Abre una ficha, captura observaciones y guarda para que aparezca aquí.</span></div>';
+  } else {
+    body.innerHTML = gestionados.map(function(s){
+      var etColor = s.etapa==="S0N"?"#1565C0":s.etapa==="S0L"?"#2E7D32":"#E65100";
+      var stColor = s.status==="Recuperado"?"background:#C8E6C9;color:#1B5E20":
+                    s.status==="Gestionado"?"background:#BBDEFB;color:#0D47A1":
+                    s.status==="En proceso"?"background:#FFF9C4;color:#E65100":"background:#f5f5f5;color:#555";
+      return '<div class="rpt-email-row">'
+        +'<div class="rpt-email-row-top">'
+          +'<div class="rpt-email-nombre">'+s.nombre+'</div>'
+          +'<div class="rpt-email-imp">'+fmt(s.total)+'</div>'
+        +'</div>'
+        +'<div class="rpt-email-meta">'
+          +'<span style="background:'+etColor+';color:#fff;font-size:8px;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:5px">'+s.etapa+'</span>'
+          +'RPU: '+s.rpu+' &nbsp;·&nbsp; '
+          +'<span style="font-size:9px;padding:1px 6px;border-radius:3px;'+stColor+'">'+s.status+'</span>'
+          +(s.gestionado_en?' &nbsp;·&nbsp; <span style="font-size:9px;color:#888">'+s.gestionado_en+'</span>':'')
+        +'</div>'
+        +(s.obs?'<div class="rpt-email-obs">&#128172; '+s.obs+'</div>':'')
+      +'</div>';
+    }).join("");
+  }
+  document.getElementById("rpt-email-modal").classList.add("open");
+}
+
+function closeRptEmail(){
+  document.getElementById("rpt-email-modal").classList.remove("open");
+}
+
+function enviarReporteCorreo(){
+  var gestionados = DATA.filter(function(x){
+    return x.gestionado_en && (x.obs || x.status !== "Pendiente");
+  });
+  if(!gestionados.length){
+    alert("No hay gestiones registradas. Captura observaciones en las fichas primero.");
+    return;
+  }
+  var hoy = new Date().toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  var responsable = document.getElementById("fil-resp").value || "Gestor en campo";
+
+  var asunto = encodeURIComponent("SiGeNa \u00b7 Reporte Gesti\u00f3n NOTPEN \u00b7 DD030 \u00b7 " + new Date().toLocaleDateString("es-MX"));
+
+  var cuerpo = "Ing. Edelmiro Garza Rodriguez\n";
+  cuerpo += "Superintendente de Zona - Nuevo Laredo DD030\n\n";
+  cuerpo += "Por medio del presente, le informo las gestiones realizadas el dia de hoy " + hoy + ":\n\n";
+  cuerpo += "======================================\n";
+  cuerpo += "SiGeNa - Sistema de Gestion de Notificaciones de Ajuste\n";
+  cuerpo += "======================================\n";
+  cuerpo += "REPORTE DE GESTION NOTPEN - " + gestionados.length + " servicio(s)\n";
+  cuerpo += "======================================\n\n";
+
+  gestionados.forEach(function(s, i){
+    cuerpo += (i+1) + ". " + s.nombre + "\n";
+    cuerpo += "   RPU: " + s.rpu + "\n";
+    cuerpo += "   Importe: " + fmt(s.total) + "\n";
+    cuerpo += "   Etapa: " + s.etapa + " | Estatus: " + s.status + "\n";
+    if(s.obs) cuerpo += "   Observacion: " + s.obs + "\n";
+    if(s.gestionado_en) cuerpo += "   Registrado: " + s.gestionado_en + "\n";
+    cuerpo += "\n";
+  });
+
+  // Resumen al final
+  var recuperados = gestionados.filter(function(x){return x.status==="Recuperado";}).length;
+  var gestionadosSt = gestionados.filter(function(x){return x.status==="Gestionado";}).length;
+  var totalImporte = gestionados.reduce(function(a,x){return a+x.total;},0);
+
+  cuerpo += "======================================\n";
+  cuerpo += "RESUMEN:\n";
+  cuerpo += "- Total gestionados: " + gestionados.length + "\n";
+  cuerpo += "- Recuperados: " + recuperados + "\n";
+  cuerpo += "- En gestion: " + gestionadosSt + "\n";
+  cuerpo += "- Importe cartera gestionada: " + fmt(totalImporte) + "\n\n";
+  cuerpo += "Atentamente,\n";
+  cuerpo += responsable + "\n";
+  cuerpo += "Enc. Procesos Comerciales - CFE DD030\n";
+  cuerpo += "Zona Nuevo Laredo - Division Golfo Norte\n";
+  cuerpo += "\nGenerado con SiGeNa - Sistema de Gestion de Notificaciones de Ajuste\n";
+
+  var mailto = "mailto:" + CORREO_SUPER
+    + "?subject=" + asunto
+    + "&body=" + encodeURIComponent(cuerpo);
+
+  window.location.href = mailto;
+}
+
+document.getElementById("rpt-email-modal").addEventListener("click",function(e){
+  if(e.target===document.getElementById("rpt-email-modal"))closeRptEmail();
+});
+
 document.getElementById("conv-modal").addEventListener("click",function(e){if(e.target===document.getElementById("conv-modal"))closeConvenio();});
 </script>
 
