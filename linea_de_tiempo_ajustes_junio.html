@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Línea de Tiempo Ajustes Junio · DD030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cfe-green:#006847;
+    --cfe-green-dark:#00432e;
+    --cfe-green-pale:#e9f4ee;
+    --cfe-green-pale2:#f3f9f5;
+    --ink:#142019;
+    --muted:#5b6b62;
+    --line:#dde6e0;
+    --paper:#f7f8f6;
+    --card:#ffffff;
+    --alert:#a8281f;
+    --alert-pale:#fbe9e7;
+    --warn:#b5740a;
+    --warn-pale:#fbf0dd;
+    --ok:#1f7a4d;
+    --ok-pale:#e7f4ec;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(20,32,25,.04), 0 8px 24px -12px rgba(20,32,25,.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
+  }
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+  a{color:var(--cfe-green-dark);}
+
+  header.top{
+    background:linear-gradient(135deg,var(--cfe-green) 0%, var(--cfe-green-dark) 100%);
+    color:#fff;
+    padding:36px 28px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.top::before{
+    content:"";
+    position:absolute; right:-60px; top:-80px;
+    width:320px; height:320px; border-radius:50%;
+    background:rgba(255,255,255,.06);
+  }
+  header.top::after{
+    content:"";
+    position:absolute; right:90px; bottom:-120px;
+    width:220px; height:220px; border-radius:50%;
+    background:rgba(255,255,255,.05);
+  }
+  .top-inner{max-width:1180px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:#bfe3d2; margin:0 0 14px;
+  }
+  h1.title{
+    font-size:34px; font-weight:700; margin:0 0 6px; letter-spacing:-.01em;
+  }
+  .subtitle{font-size:16px; color:#d7ece2; margin:0 0 18px; font-weight:400;}
+  .normabar{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+    border-radius:999px; padding:6px 14px; font-size:12.5px; color:#eafff3;
+    font-family:"IBM Plex Mono",monospace; margin-bottom:18px;
+  }
+  .addressee{
+    display:flex; align-items:flex-start; gap:12px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:10px;
+    padding:13px 16px;
+    max-width:720px;
+    font-size:13.5px;
+  }
+  .addressee .dot{
+    width:8px;height:8px;border-radius:50%;background:#ffd166;flex:0 0 auto;margin-top:5px;
+  }
+  .addressee b{font-weight:600;}
+  .addressee .meta{color:#cfe7da; font-size:12.5px; margin-top:3px;}
+
+  main{max-width:1180px; margin:0 auto; padding:30px 24px 60px;}
+
+  .kpis{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:14px;
+    margin-bottom:34px;
+  }
+  .kpi{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 16px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .kpi .lbl{font-size:11.5px; color:var(--muted); font-weight:500; text-transform:uppercase; letter-spacing:.04em;}
+  .kpi .val{font-size:26px; font-weight:700; letter-spacing:-.01em; color:var(--ink);}
+  .kpi .val.alert{color:var(--alert);}
+  .kpi .sub{font-size:12px; color:var(--muted);}
+
+  .section{margin-bottom:38px;}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;}
+  .section-head h2{font-size:19px; margin:0; font-weight:700;}
+  .section-head .tag{
+    font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:999px;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+  .tag.crit{background:var(--alert-pale); color:var(--alert);}
+  .tag.info{background:var(--cfe-green-pale); color:var(--cfe-green-dark);}
+  .hint{font-size:13px; color:var(--muted); margin:-10px 0 16px;}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:24px;
+  }
+
+  .norma-box{
+    background:var(--cfe-green-pale2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; font-size:13px; color:var(--ink); margin-bottom:18px;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .norma-box b{color:var(--cfe-green-dark);}
+  .norma-box .icon{font-size:18px;}
+
+  /* Pipeline (signature: official Tabla 8 line-of-time) */
+  .pipeline-card{padding:26px 22px 18px;}
+  .pipeline{display:flex; flex-direction:column; gap:0;}
+  .step-row{
+    display:grid; grid-template-columns:36px 1fr 110px 230px 90px; align-items:center;
+    gap:14px; padding:11px 4px; border-bottom:1px solid var(--line);
+  }
+  .step-row:last-child{border-bottom:none;}
+  .step-row.empty{opacity:.45;}
+  .step-num{
+    width:28px; height:28px; border-radius:50%; background:var(--cfe-green-pale); color:var(--cfe-green-dark);
+    font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:12.5px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-row.crit .step-num{background:var(--alert); color:#fff;}
+  .step-name{font-size:13.5px; font-weight:600;}
+  .step-owner{font-size:11px; color:var(--muted); margin-top:2px; font-weight:400;}
+  .step-sla{font-size:12px; color:var(--muted); font-family:"IBM Plex Mono",monospace; text-align:center;}
+  .step-bar-wrap{display:flex; align-items:center; gap:8px;}
+  .step-track{flex:1; height:14px; background:var(--cfe-green-pale2); border-radius:7px; overflow:hidden; position:relative;}
+  .step-fill{height:100%; border-radius:7px;}
+  .step-mult{font-size:11.5px; font-weight:700; font-family:"IBM Plex Mono",monospace; white-space:nowrap; width:48px;}
+  .step-reg{text-align:right; font-size:12.5px; font-family:"IBM Plex Mono",monospace;}
+  .step-reg .n{font-weight:700;}
+  .step-reg .m{color:var(--muted); font-size:11px;}
+
+  .legend{display:flex; gap:18px; margin-top:16px; flex-wrap:wrap; font-size:12px; color:var(--muted);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  .grid2{display:grid; grid-template-columns:1.3fr 1fr; gap:18px;}
+  @media (max-width:880px){ .grid2{grid-template-columns:1fr;} .kpis{grid-template-columns:repeat(2,1fr);}
+    .step-row{grid-template-columns:28px 1fr; grid-template-areas:"num name" "sla sla" "bar bar" "reg reg"; row-gap:6px;}
+  }
+
+  .hbar-row{display:grid; grid-template-columns:170px 1fr 92px; align-items:center; gap:10px; margin-bottom:11px;}
+  .hbar-row .name{font-size:12.5px; color:var(--ink); font-weight:500;}
+  .hbar-track{background:var(--cfe-green-pale2); border-radius:6px; height:16px; position:relative; overflow:hidden;}
+  .hbar-fill{height:100%; border-radius:6px;}
+  .hbar-row .amt{font-size:12px; text-align:right; font-family:"IBM Plex Mono",monospace; color:var(--muted);}
+
+  .donut-wrap{display:flex; align-items:center; gap:22px; flex-wrap:wrap; justify-content:center;}
+  .donut{width:168px; height:168px; border-radius:50%; position:relative; flex:0 0 auto;}
+  .donut .hole{
+    position:absolute; inset:26px; background:var(--card); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+  }
+  .donut .hole b{font-size:22px;}
+  .donut .hole span{font-size:10.5px; color:var(--muted);}
+  .donut-legend{display:flex; flex-direction:column; gap:9px; font-size:12.5px;}
+  .donut-legend i{width:11px; height:11px; border-radius:3px; display:inline-block; margin-right:7px;}
+  .donut-legend b{font-family:"IBM Plex Mono",monospace;}
+
+  .aging-row{display:grid; grid-template-columns:90px 1fr 150px; align-items:center; gap:12px; margin-bottom:10px;}
+  .aging-row .bucket{font-size:12.5px; font-weight:600; font-family:"IBM Plex Mono",monospace;}
+  .aging-track{background:var(--cfe-green-pale2); border-radius:6px; height:20px;}
+  .aging-fill{height:100%; border-radius:6px;}
+  .aging-row .figs{font-size:12px; text-align:right; color:var(--muted);}
+  .aging-row .figs b{color:var(--ink); font-family:"IBM Plex Mono",monospace;}
+
+  table{width:100%; border-collapse:collapse; font-size:12.8px;}
+  thead th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--muted); border-bottom:1.5px solid var(--line); padding:8px 10px; font-weight:600;
+  }
+  tbody td{padding:9px 10px; border-bottom:1px solid var(--line);}
+  tbody tr:hover{background:var(--cfe-green-pale2);}
+  td.acc{font-family:"IBM Plex Mono",monospace; font-size:11.8px; color:var(--muted);}
+  td.num{text-align:right; font-family:"IBM Plex Mono",monospace;}
+  .pill{font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:999px; white-space:nowrap;}
+  .pill.crit{background:var(--alert-pale); color:var(--alert);}
+  .pill.warn{background:var(--warn-pale); color:var(--warn);}
+  .pill.etapa{background:var(--cfe-green-pale); color:var(--cfe-green-dark);}
+
+  .jbox{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .jcard{border:1px solid var(--line); border-radius:10px; padding:16px; background:var(--cfe-green-pale2);}
+  .jcard .lbl{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em;}
+  .jcard .val{font-size:21px; font-weight:700; margin-top:4px;}
+  @media (max-width:700px){ .jbox{grid-template-columns:1fr;} }
+
+  .falla-list{display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .falla-row{display:grid; grid-template-columns:60px 1fr 50px; gap:10px; align-items:center; font-size:12.5px;}
+  .falla-row .code{font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--cfe-green-dark);}
+  .falla-row .desc{color:var(--muted);}
+  .falla-row .ct{text-align:right; font-family:"IBM Plex Mono",monospace;}
+
+  .opps{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media (max-width:880px){ .opps{grid-template-columns:1fr;} }
+  .opp{
+    border:1px solid var(--line); border-left:4px solid var(--cfe-green); border-radius:10px;
+    padding:16px 18px; background:#fff;
+  }
+  .opp.high{border-left-color:var(--alert);}
+  .opp .opp-head{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .opp .opp-num{
+    font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:12px;
+    background:var(--cfe-green-pale); color:var(--cfe-green-dark); border-radius:6px; padding:2px 7px;
+  }
+  .opp.high .opp-num{background:var(--alert-pale); color:var(--alert);}
+  .opp h3{font-size:14.5px; margin:0; font-weight:700;}
+  .opp p{font-size:13px; color:var(--muted); margin:0;}
+
+  footer{
+    border-top:1px solid var(--line); margin-top:10px; padding:22px 24px 36px;
+    max-width:1180px; margin-left:auto; margin-right:auto;
+    font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <p class="eyebrow">CFE · División Golfo Norte — Zona Nuevo Laredo (DD030)</p>
+    <h1 class="title">Línea de Tiempo Ajustes Junio</h1>
+    <p class="subtitle">Cumplimiento de la línea de tiempo de ajustes a la facturación · corte al 20 de junio de 2026</p>
+    <div class="normabar">📘 Marco normativo: P-4001-021 Rev. 3 (22 mayo 2026) — Numeral 4.15, Tabla 8</div>
+    <br>
+    <div class="addressee">
+      <span class="dot"></span>
+      <div>
+        <div><b>Para conocimiento de:</b> Ing. Edelmiro Garza Rodríguez — Superintendente de Zona</div>
+        <div class="meta">Elaboró: Procesos Comerciales DD030 &nbsp;·&nbsp; Generado: <span id="gendate"></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="section">
+    <div class="norma-box">
+      <span class="icon">⚖️</span>
+      <div>
+        <b>Lo que exige el procedimiento:</b> el numeral 4.15 fija en <b>50 días naturales</b> el plazo completo desde el registro de la anomalía hasta el desmantelamiento del suministro (sin contar Jurídico). El numeral 3 hace al <b>Superintendente de Zona</b> responsable de "vigilar el cumplimiento de los tiempos por actividad (línea de tiempo)". Esta vista mide, etapa por etapa, qué tan lejos está el expediente real de ese estándar.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Línea de tiempo oficial (Tabla 8) vs. expediente real</h2>
+      <span class="tag crit">2 etapas exceden 19x la norma</span>
+    </div>
+    <p class="hint">Cada fila es una actividad de la Tabla 8 del procedimiento. La barra compara los días reales promedio contra el plazo normativo de esa actividad.</p>
+    <div class="card pipeline-card">
+      <div class="pipeline" id="pipeline"></div>
+      <div class="legend">
+        <span><i style="background:var(--ok)"></i> Dentro de norma</span>
+        <span><i style="background:var(--warn)"></i> 1–10x la norma</span>
+        <span><i style="background:var(--alert)"></i> Más de 10x la norma</span>
+        <span style="opacity:.6">· Filas atenuadas: sin acumulación de pendientes visible en este corte</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid2">
+      <div class="card">
+        <div class="section-head" style="margin-bottom:14px;">
+          <h2 style="font-size:16px;">Monto detenido por etapa oficial</h2>
+        </div>
+        <div id="stagebars"></div>
+      </div>
+      <div class="card">
+        <div class="section-head" style="margin-bottom:14px;">
+          <h2 style="font-size:16px;">Concentración del cuello de botella</h2>
+        </div>
+        <p class="hint" style="margin-bottom:14px;">Agencia, dentro de Desmantelamiento del suministro (S0P)</p>
+        <div class="donut-wrap" id="donutwrap"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid2">
+      <div class="card">
+        <div class="section-head" style="margin-bottom:14px;">
+          <h2 style="font-size:16px;">Antigüedad de los casos en Desmantelamiento</h2>
+        </div>
+        <p class="hint" style="margin-bottom:14px;">Norma: 12 días. Días reales sin movimiento, por rango.</p>
+        <div id="agingcard"></div>
+      </div>
+      <div class="card">
+        <div class="section-head" style="margin-bottom:14px;">
+          <h2 style="font-size:16px;">Anomalías más frecuentes (Tabla 3, P-4001-021)</h2>
+        </div>
+        <p class="hint" style="margin-bottom:0;">Claves decodificadas según el catálogo oficial del procedimiento.</p>
+        <div class="falla-list" id="fallalist"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Casos prioritarios por monto</h2>
+      <span class="tag info">Top 12 · todas las etapas con pendiente</span>
+    </div>
+    <p class="hint">Mayor exposición económica dentro del expediente, con su etapa oficial y días reales transcurridos.</p>
+    <div class="card" style="padding:8px 18px 14px;">
+      <table id="toptable">
+        <thead><tr>
+          <th>Cuenta</th><th>Nombre</th><th>Agencia</th><th>Etapa (Tabla 8)</th><th>Falla</th>
+          <th style="text-align:right;">Monto</th><th style="text-align:right;">Días</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Gestión Jurídica</h2>
+      <span class="tag info">Ajustes &gt; 350 SMG · numeral 4.12</span>
+    </div>
+    <p class="hint">Expedientes turnados al área de Asuntos Jurídicos, candidatos a incobrabilidad (numeral 4.11.2) o gestión extrajudicial/judicial.</p>
+    <div class="card">
+      <div class="jbox" id="jbox"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Áreas de oportunidad</h2>
+    </div>
+    <div class="opps" id="opps"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Fuente: Linea_de_tiempo_Junio_para_dashboard.xlsx (1,138 registros · $43.5M) mapeado a P-4001-021 Rev.3, "Procedimiento para el tratamiento de servicios con anomalías que requieren ajuste a la facturación", numeral 4.15 Tabla 8 y numeral 4.2 Tabla 3.</span>
+  <span>Documento de apoyo a la gestión, no sustituye los reportes oficiales NOTPEN / SICOSS.</span>
+</footer>
+
+<script>
+const DATA = {"ref_date": "2026-06-20", "steps": [{"n": 1, "step": "Registro de anomalía en SNAF", "owner": "MCyS", "sla": 2, "reg": 0, "monto": 0.0, "dias_avg": null, "mult": null}, {"n": 2, "step": "Validación de expediente y cálculo", "owner": "OAAF / Facturación / Agencia / CAI", "sla": 8, "reg": 13, "monto": 0.0, "dias_avg": 0.9, "mult": 0.1}, {"n": 3, "step": "Emisión del Aviso de cobro", "owner": "OAAF / Facturación / Agencia / CAI", "sla": 2, "reg": 0, "monto": 0.0, "dias_avg": null, "mult": null}, {"n": 4, "step": "Entrega del Aviso de cobro al Usuario Final", "owner": "OAAF / Agencia / CAI", "sla": 3, "reg": 11, "monto": 1957356.0, "dias_avg": 29.5, "mult": 9.8}, {"n": 5, "step": "Atención al Usuario Final", "owner": "OAAF / Agencia / CAI", "sla": 10, "reg": 0, "monto": 0.0, "dias_avg": null, "mult": null}, {"n": 6, "step": "Suspensión de suministro (S0L)", "owner": "OAAF / MCyS / Agencia", "sla": 3, "reg": 60, "monto": 2348830.0, "dias_avg": 64.5, "mult": 21.5}, {"n": 7, "step": "Gestión de cobro", "owner": "OAAF / Agencia / CAI", "sla": 10, "reg": 0, "monto": 0.0, "dias_avg": null, "mult": null}, {"n": 8, "step": "Desmantelamiento del suministro (S0P)", "owner": "OAAF / MCyS / Agencia", "sla": 12, "reg": 1010, "monto": 34250022.0, "dias_avg": 239.1, "mult": 19.9}, {"n": 9, "step": "Gestión Jurídica", "owner": "Asuntos Jurídicos", "sla": 76, "reg": 44, "monto": 4919188.0, "dias_avg": 228.3, "mult": 3.0}], "total_reg": 1138, "total_monto": 43475396.0, "desm_agencia": [{"Agencia": "AGENCIA PONIENTE  03", "reg": 662, "monto": 24062467, "dias": 242.43957703927492}, {"Agencia": "AGENCIA ORIENTE 03", "reg": 334, "monto": 9735527, "dias": 237.60479041916167}, {"Agencia": "AGENCIA CAMARGO", "reg": 1, "monto": 244116, "dias": 250.0}, {"Agencia": "AGENCIA ANAHUAC", "reg": 13, "monto": 207912, "dias": 109.53846153846153}], "desm_aging": [{"bucket": "0-30", "reg": 62, "monto": 1881806}, {"bucket": "31-60", "reg": 77, "monto": 1174936}, {"bucket": "61-90", "reg": 37, "monto": 1056702}, {"bucket": "91-180", "reg": 125, "monto": 5230907}, {"bucket": "181-365", "reg": 640, "monto": 22788118}, {"bucket": "365+", "reg": 69, "monto": 2117553}], "desm_falla": [{"falla": "UI03", "reg": 644, "desc": "Servicio directo sin contrato"}, {"falla": "UI12", "reg": 180, "desc": "Terminales de base enchufe puenteadas"}, {"falla": "FM01", "reg": 109, "desc": "Servicio directo (Falla de Medición)"}, {"falla": "UI04", "reg": 56, "desc": "Carga conectada antes de la medición"}, {"falla": "FM05", "reg": 6, "desc": "Medidor quemado"}, {"falla": "UI13", "reg": 5, "desc": "Sin contrato con medición instalada"}], "juridico_agencia": [{"Agencia": "AGENCIA ORIENTE 03", "reg": 18, "monto": 1977384, "dias": 225.55555555555554}, {"Agencia": "AGENCIA PONIENTE  03", "reg": 26, "monto": 2941804, "dias": 230.19230769230768}], "top_cases": [{"EtapaLbl": "Entrega Aviso de cobro", "Falla": "UI09", "Notif": 910, "Agencia": "AGENCIA CAMARGO", "Cuenta": "77DD03F017721160", "Nombre": "COMAPA", "$ Total": 798393, "Dias": 5}, {"EtapaLbl": "Desmantelamiento (S0P)", "Falla": "UI12", "Notif": 167, "Agencia": "AGENCIA ORIENTE 03", "Cuenta": "33DD03A010064700", "Nombre": "GUTIERREZ VILLARREAL ALEJANDRA", "$ Total": 457876, "Dias": 132}, {"EtapaLbl": "Entrega Aviso de cobro", "Falla": "UI09", "Notif": 911, "Agencia": "AGENCIA CAMARGO", "Cuenta": "76DD03F017630040", "Nombre": "DE LA GARZA BUENTELLO ABRAHAM", "$ Total": 445135, "Dias": 4}, {"EtapaLbl": "Desmantelamiento (S0P)", "Falla": "UI12", "Notif": 2690, "Agencia": "AGENCIA PONIENTE  03", "Cuenta": "37DD03C013734221", "Nombre": "HERNANDEZ PRADO ALEIDA", "$ Total": 367167, "Dias": 203}, {"EtapaLbl": "Gestión Jurídica", "Falla": "UI03", "Notif": 2567, "Agencia": "AGENCIA ORIENTE 03", "Cuenta": "99DD03A999993417", "Nombre": "MAXILIANO CORDOVA NUEZ", "$ Total": 365169, "Dias": 241}, {"EtapaLbl": "Suspensión (S0L)", "Falla": "UI09", "Notif": 897, "Agencia": "AGENCIA CAMARGO", "Cuenta": "76DD03F017610590", "Nombre": "RODRIGUEZ ALMORA EUSEBIO", "$ Total": 359888, "Dias": 7}, {"EtapaLbl": "Desmantelamiento (S0P)", "Falla": "UI03", "Notif": 1756, "Agencia": "AGENCIA PONIENTE  03", "Cuenta": "99DD03C999994420", "Nombre": "FREDY GARCIA CASTILLO", "$ Total": 354163, "Dias": 349}, {"EtapaLbl": "Gestión Jurídica", "Falla": "UI03", "Notif": 1797, "Agencia": "AGENCIA PONIENTE  03", "Cuenta": "99DD03C999994457", "Nombre": "MARIA LOURDES TOVAR", "$ Total": 328688, "Dias": 343}, {"EtapaLbl": "Suspensión (S0L)", "Falla": "UI12", "Notif": 888, "Agencia": "AGENCIA MIGUEL ALEMAN", "Cuenta": "25DD03G012523830", "Nombre": "REYES REYES DANIEL ALFREDO", "$ Total": 281595, "Dias": 10}, {"EtapaLbl": "Desmantelamiento (S0P)", "Falla": "UI12", "Notif": 186, "Agencia": "AGENCIA ORIENTE 03", "Cuenta": "10DD03A011060140", "Nombre": "SAUCEDA C VICTOR", "$ Total": 261111, "Dias": 126}, {"EtapaLbl": "Gestión Jurídica", "Falla": "UI03", "Notif": 2410, "Agencia": "AGENCIA PONIENTE  03", "Cuenta": "99DD03C999994683", "Nombre": "RICARDO HUMBERTO MTZ VAZQUEZ", "$ Total": 246382, "Dias": 266}, {"EtapaLbl": "Desmantelamiento (S0P)", "Falla": "UI09", "Notif": 2501, "Agencia": "AGENCIA CAMARGO", "Cuenta": "76DD03F017610680", "Nombre": "COMAPA", "$ Total": 244116, "Dias": 250}]};
+
+document.getElementById('gendate').textContent = new Date().toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+
+function money(v, decimals){
+  if(v===null||v===undefined) return '—';
+  return '$' + Number(v).toLocaleString('es-MX', {maximumFractionDigits: decimals||0});
+}
+function moneyShort(v){
+  if(!v) return '$0';
+  if(v>=1000000) return '$' + (v/1000000).toFixed(1) + 'M';
+  if(v>=1000) return '$' + (v/1000).toFixed(0) + 'k';
+  return '$' + v.toFixed(0);
+}
+function pct(a,b){ return ((a/b)*100).toFixed(0)+'%'; }
+
+const desmStep = DATA.steps.find(s=>s.step.startsWith('Desmantelamiento'));
+const jurStep = DATA.steps.find(s=>s.step.startsWith('Gestión Jurídica'));
+const corteStep = DATA.steps.find(s=>s.step.startsWith('Suspensión'));
+
+/* KPIs */
+const kpis = [
+  {lbl:'Expediente total', val: DATA.total_reg.toLocaleString('es-MX'), sub:'casos en el pipeline de ajustes'},
+  {lbl:'Monto en proceso', val: moneyShort(DATA.total_monto), sub: money(DATA.total_monto)+' MXN'},
+  {lbl:'Etapa más crítica', val: desmStep.mult+'x la norma', sub:desmStep.reg.toLocaleString('es-MX')+' casos en Desmantelamiento', alert:true},
+  {lbl:'Antigüedad vs norma (12 d)', val: desmStep.dias_avg+' días', sub:'promedio real en esa etapa', alert:true},
+  {lbl:'En Gestión Jurídica', val: jurStep.reg+' casos', sub: moneyShort(jurStep.monto)+' · '+jurStep.mult+'x el plazo jurídico'},
+];
+document.getElementById('kpis').innerHTML = kpis.map(k=>`
+  <div class="kpi">
+    <div class="lbl">${k.lbl}</div>
+    <div class="val ${k.alert?'alert':''}">${k.val}</div>
+    <div class="sub">${k.sub}</div>
+  </div>`).join('');
+
+/* Pipeline: official Tabla 8 steps */
+function multColor(m){
+  if(m===null||m===undefined) return '#c7d2cc';
+  if(m>10) return 'var(--alert)';
+  if(m>1) return 'var(--warn)';
+  return 'var(--ok)';
+}
+const maxMult = Math.max(...DATA.steps.map(s=>s.mult||0));
+document.getElementById('pipeline').innerHTML = DATA.steps.map(s=>{
+  const empty = s.reg===0;
+  const isCrit = (s.mult||0) > 10;
+  const w = s.mult ? Math.max(4, Math.min(100, Math.sqrt(s.mult/maxMult)*100)) : 3;
+  return `
+  <div class="step-row ${empty?'empty':''} ${isCrit?'crit':''}">
+    <div class="step-num">${String(s.n).padStart(2,'0')}</div>
+    <div>
+      <div class="step-name">${s.step}</div>
+      <div class="step-owner">${s.owner}</div>
+    </div>
+    <div class="step-sla">norma: ${s.sla} d</div>
+    <div class="step-bar-wrap">
+      <div class="step-track"><div class="step-fill" style="width:${w}%;background:${multColor(s.mult)};"></div></div>
+      <div class="step-mult" style="color:${multColor(s.mult)}">${s.mult!==null?s.mult+'x':'—'}</div>
+    </div>
+    <div class="step-reg">
+      <div class="n">${empty?'—':s.reg.toLocaleString('es-MX')}</div>
+      <div class="m">${s.monto?moneyShort(s.monto):''}</div>
+    </div>
+  </div>`;
+}).join('');
+
+/* Stage money bars (only steps with monto>0) */
+const sortedSteps = DATA.steps.filter(s=>s.monto>0).sort((a,b)=>b.monto-a.monto);
+const maxMonto = sortedSteps[0].monto;
+document.getElementById('stagebars').innerHTML = sortedSteps.map(s=>{
+  const w = Math.max(2, Math.sqrt(s.monto/maxMonto)*100);
+  const isCrit = (s.mult||0)>10;
+  return `
+  <div class="hbar-row">
+    <div class="name" style="color:${isCrit?'var(--alert)':'var(--ink)'};font-weight:${isCrit?700:500};">${s.step.split('(')[0].trim()}</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:${w}%;background:${multColor(s.mult)};"></div></div>
+    <div class="amt">${moneyShort(s.monto)}</div>
+  </div>`;
+}).join('');
+
+/* Donut agencia (desmantelamiento) */
+const colors = ['#006847','#a8281f','#b5740a','#5b6b62'];
+const ag = DATA.desm_agencia;
+const totalAg = ag.reduce((a,b)=>a+b.monto,0);
+let acc = 0;
+const gradParts = ag.map((a,i)=>{
+  const start = acc/totalAg*360;
+  acc += a.monto;
+  const end = acc/totalAg*360;
+  return `${colors[i%colors.length]} ${start}deg ${end}deg`;
+});
+document.getElementById('donutwrap').innerHTML = `
+  <div class="donut" style="background:conic-gradient(${gradParts.join(',')});">
+    <div class="hole"><b>${ag.length}</b><span>agencias</span></div>
+  </div>
+  <div class="donut-legend">
+    ${ag.map((a,i)=>`<div><i style="background:${colors[i%colors.length]}"></i>${a.Agencia.replace('AGENCIA ','').trim()} — <b>${pct(a.monto,totalAg)}</b> · ${moneyShort(a.monto)} (${a.reg} casos)</div>`).join('')}
+  </div>`;
+
+/* Aging */
+const agingColors = {'0-30':'#1f7a4d','31-60':'#3f8f5c','61-90':'#b5740a','91-180':'#c4860a','181-365':'#a8281f','365+':'#7a1d16'};
+const maxAgingMonto = Math.max(...DATA.desm_aging.map(a=>a.monto));
+document.getElementById('agingcard').innerHTML = DATA.desm_aging.map(a=>{
+  const w = Math.max(3, Math.sqrt(a.monto/maxAgingMonto)*100);
+  return `
+  <div class="aging-row">
+    <div class="bucket">${a.bucket} d</div>
+    <div class="aging-track"><div class="aging-fill" style="width:${w}%;background:${agingColors[a.bucket]||'#888'};"></div></div>
+    <div class="figs"><b>${a.reg}</b> casos · ${moneyShort(a.monto)}</div>
+  </div>`;
+}).join('');
+
+/* Falla codes */
+document.getElementById('fallalist').innerHTML = DATA.desm_falla.map(f=>`
+  <div class="falla-row">
+    <div class="code">${f.falla}</div>
+    <div class="desc">${f.desc}</div>
+    <div class="ct">${f.reg}</div>
+  </div>`).join('');
+
+/* Top table */
+document.querySelector('#toptable tbody').innerHTML = DATA.top_cases.map(c=>{
+  const dias = c['Dias'];
+  const pillClass = dias>300 ? 'crit' : (dias>150?'warn':'');
+  const pill = pillClass ? `<span class="pill ${pillClass}">${dias} d</span>` : dias+' d';
+  return `
+  <tr>
+    <td class="acc">${c.Cuenta}</td>
+    <td>${c.Nombre}</td>
+    <td>${c.Agencia.replace('AGENCIA ','').trim()}</td>
+    <td><span class="pill etapa">${c.EtapaLbl}</span></td>
+    <td class="acc">${c.Falla}</td>
+    <td class="num">${money(c['$ Total'])}</td>
+    <td class="num">${pill}</td>
+  </tr>`;
+}).join('');
+
+/* Juridico */
+const jAg = DATA.juridico_agencia;
+const jTotalMonto = jAg.reduce((a,b)=>a+b.monto,0);
+const jTotalReg = jAg.reduce((a,b)=>a+b.reg,0);
+let jHtml = `
+  <div class="jcard"><div class="lbl">Total identificado</div><div class="val">${jTotalReg} casos</div><div class="lbl" style="margin-top:6px;">${money(jTotalMonto)}</div></div>
+`;
+jAg.sort((a,b)=>b.monto-a.monto).forEach(a=>{
+  jHtml += `<div class="jcard"><div class="lbl">${a.Agencia.replace('AGENCIA ','').trim()}</div><div class="val">${a.reg} casos</div><div class="lbl" style="margin-top:6px;">${moneyShort(a.monto)} · ${a.dias?a.dias.toFixed(0):'—'} días prom.</div></div>`;
+});
+document.getElementById('jbox').innerHTML = jHtml;
+
+/* Opportunities */
+const opps = [
+  {high:true, n:'01', title:'Priorizar Desmantelamiento en Agencia Poniente 03', text:'662 casos / $24.1M están en esta agencia dentro de la etapa con mayor incumplimiento (19.9x la norma de 12 días). Es el primer punto de impacto.'},
+  {high:true, n:'02', title:'Cerrar la brecha de 19.9x en Desmantelamiento (S0P)', text:'1,010 casos llevan en promedio 239 días esperando la orden S0P, cuando el procedimiento marca 12. Resolver el bloque de 181-365 días evita que sigan escalando a más de un año.'},
+  {high:false, n:'03', title:'Atender la Suspensión (S0L), 21.5x sobre la norma', text:'60 casos llevan 64.5 días en promedio esperando la suspensión del suministro, contra los 3 días que marca el numeral 4.15. Volumen menor, pero es la etapa con peor cumplimiento relativo.'},
+  {high:false, n:'04', title:'Acelerar Gestión Jurídica (3x el plazo de 76 días)', text:jurStep.reg+' casos ('+money(jurStep.monto)+') superan en promedio el plazo conjunto de entrega, extrajudicial y selección para inicio judicial.'},
+];
+document.getElementById('opps').innerHTML = opps.map(o=>`
+  <div class="opp ${o.high?'high':''}">
+    <div class="opp-head"><span class="opp-num">${o.n}</span><h3>${o.title}</h3></div>
+    <p>${o.text}</p>
+  </div>`).join('');
+</script>
+</body>
+</html>
